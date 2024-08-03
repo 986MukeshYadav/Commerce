@@ -4,6 +4,8 @@ import loginIcons from "../assest/signin.gif";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import imageTobase64 from "../helpers/imageTobase64";
+
 
 const SignUp = () => {
   const [showPassword, setshowPassword] = useState(false);
@@ -25,10 +27,16 @@ const SignUp = () => {
     });
   };
 
-  const handleUploadPic=(e)=>{
+  const handleUploadPic= async(e)=>{
     const file=e.target.files[0]
 
-    console.log("File:",file)
+    const imagePic = await imageTobase64(file)
+    setData((preve)=>{
+      return {
+       ...preve,
+        profilepic: imagePic,
+      }
+    })
   }
 
   const handleSubmit = (e) => {
@@ -42,7 +50,7 @@ const SignUp = () => {
         <div className="bg-white p-5 w-full max-w-sm mx-auto">
           <div className="w-20 h-20 mx-auto relative overflow-hidden rounded-full">
             <div>
-              <img src={loginIcons} alt="login icons" />
+              <img src={data.profilepic || loginIcons} alt="login icons" />
             </div>
             <form>
               <label>
@@ -63,6 +71,7 @@ const SignUp = () => {
                   name="name"
                   value={data.name}
                   onChange={handleOnChange}
+                  required
                   className="w-full outline-none bg-transparent"
                 />
               </div>
@@ -76,6 +85,7 @@ const SignUp = () => {
                   name="email"
                   value={data.email}
                   onChange={handleOnChange}
+                  required
                   className="w-full outline-none bg-transparent"
                 />
               </div>
@@ -89,6 +99,7 @@ const SignUp = () => {
                   name="password"
                   value={data.password}
                   onChange={handleOnChange}
+                  required
                   className="w-full outline-none bg-transparent"
                 />
                 <div
@@ -108,6 +119,7 @@ const SignUp = () => {
                   name="confirmpassword"
                   value={data.confirmpassword}
                   onChange={handleOnChange}
+                  required
                   className="w-full outline-none bg-transparent"
                 />
                 <div
