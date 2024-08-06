@@ -5,6 +5,8 @@ import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import imageTobase64 from "../helpers/imageTobase64";
+import SummaryApi from "../common";
+import { toast } from 'react-toastify';
 
 
 const SignUp = () => {
@@ -39,11 +41,29 @@ const SignUp = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  };
 
-  console.log("user Data:", data);
+    if(data.password === data.confirmPassword){
+      const dataResponse = await fetch(SummaryApi.SignUp.url,{
+        method: SummaryApi.SignUp.method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      const dataApi = await dataResponse.json()
+      if(dataApi.success){
+        toast(dataApi.message)
+      }
+      if(dataApi.error){
+        toast.error(dataApi.message)
+      }
+
+  }else{
+    console.log("Please check password and confirm password")
+  }
+    }
   return (
     <section id="signup">
       <div className="mx-auto container p-4">
@@ -116,8 +136,8 @@ const SignUp = () => {
                 <input
                   type={showConformPassword ? "text" : "password"}
                   placeholder="Confirm your password"
-                  name="confirmpassword"
-                  value={data.confirmpassword}
+                  name="confirmPassword"
+                  value={data.confirmPassword}
                   onChange={handleOnChange}
                   required
                   className="w-full outline-none bg-transparent"
