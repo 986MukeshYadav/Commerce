@@ -19,7 +19,7 @@ if(!user){
 }
 
 const checkPassword = await bcrypt.compare(password, user.password)
-console.log("checkPassword",checkPassword)
+
 
 if(checkPassword){
     const tokendata = {

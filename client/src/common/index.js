@@ -10,6 +10,10 @@ const SummaryApi = {
     SignIn:{
         url:`${serverDomain}/api/signin`,
         method :"post"
+    },
+    current_user:{
+        url:`${serverDomain}/api/user-details`,
+        method :"get"
     }
 }
 
