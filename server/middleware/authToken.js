@@ -22,11 +22,11 @@ async function authToken(req,res,next){
                     console.log('Error auth',err);
                     
                 }
-                req.userId = decoded?._id 
+                req.userId = decoded.tokendata?._id;
                 
                 next()
                 
-            })
+            });
 
         }catch(err){
             res.json(400).json({

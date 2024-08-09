@@ -8,10 +8,13 @@ import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
 import SummaryApi from './common';
 import Context from './context';
-
+import { setUserDetails } from './store/userSlice';
+import { useDispatch } from 'react-redux';
 
 
 function App() {
+   
+  const dispatch = useDispatch()
 
   const fetchUserDetails = async()=>{
     const dataResponse = await fetch(SummaryApi.current_user.url,{
@@ -19,13 +22,18 @@ function App() {
       credentials : 'include'
     })
     const dataApi = await dataResponse.json()
+    
+    if(dataApi.success){
+     dispatch(setUserDetails(dataApi.data))
+    }
+
     console.log('data-user',dataResponse);
     
   }
   useEffect(()=>{
     /**user Details */
     fetchUserDetails()
-  },[])
+  })
   return (
     <>
     <Context.Provider value={{
