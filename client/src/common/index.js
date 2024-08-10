@@ -27,6 +27,14 @@ const SummaryApi = {
    updateUser:{
     url:`${serverDomain}/api/update-user`,
     method:'post',
+   },
+   uploadProduct:{
+    url:`${serverDomain}/api/upload-product`,
+    method:'post',
+   },
+   allProduct : {
+    url:`${serverDomain}/api/get-product`,
+    method:'get',
    }
 }
 
