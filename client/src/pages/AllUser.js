@@ -13,7 +13,7 @@ const AllUser = () => {
         name:"",
         role:"",
         _id:"",
-    })
+    })      
 
     const fetchAllUsers = async ()=>{
         const fetchData = await fetch(SummaryApi.allUser.url,{

@@ -20,7 +20,7 @@ const UploadProduct = ({
     description : "",
     price : "",
     sellingPrice : ""
-  })
+  })          
   const [openFullScreenImage,setOpenFullScreenImage] = useState(false)
   const [fullScreenImage,setFullScreenImage] = useState("")
 
