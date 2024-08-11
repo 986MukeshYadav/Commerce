@@ -82,6 +82,7 @@ const UploadProduct = ({
     if(responseData.success){
         toast.success(responseData?.message)
         onClose()
+        fetchData()
         
     }
 
